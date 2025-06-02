@@ -1,6 +1,6 @@
 class BookRemoteDataSource {
   Future<List<Map<String, dynamic>>> fetchBooks() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 5000));
     return [
       {
         'id': '1',

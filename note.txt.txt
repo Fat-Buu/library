@@ -1,0 +1,3 @@
+flutter pub run build_runner build --delete-conflicting-outputs
+
+แอป “ห้องสมุด” โดยใช้ Flutter + Riverpod + Clean Architecture + MVVM + Routing + Annotation ใช่ไหมครับ?
