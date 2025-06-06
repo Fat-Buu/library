@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:oneoone_library/features/home/presentation/views/pages/home.dart';
 
 import '../../features/books/presentation/views/pages/book_list_screen.dart';
 
@@ -7,8 +8,14 @@ class AppRoutes {
 }
 
 final GoRouter router = GoRouter(
-  initialLocation: '/books',
+  initialLocation: '/home',
   routes: <RouteBase>[
+    GoRoute(
+      path: "/home",
+      builder: (context, state) {
+        return const HomeScreen();
+      },
+    ),
     GoRoute(
       path: "/books",
       builder: (context, state) {
