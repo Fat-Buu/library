@@ -1,4 +1,2 @@
 flutter pub run build_runner build --delete-conflicting-outputs
 dart run build_runner watch -d
-
-แอป “ห้องสมุด” โดยใช้ Flutter + Riverpod + Clean Architecture + MVVM + Routing + Annotation ใช่ไหมครับ?
