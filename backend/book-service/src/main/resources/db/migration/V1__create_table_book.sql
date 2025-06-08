@@ -1,4 +1,4 @@
-CREATE TABLE BOOK (
+CREATE TABLE book (
 	id varchar(100) NOT NULL,
 	name varchar(100) NULL,
 	author varchar(100) NULL,
