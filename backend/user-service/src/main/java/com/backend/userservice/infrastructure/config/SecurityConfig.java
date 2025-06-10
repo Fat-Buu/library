@@ -1,4 +1,4 @@
-package com.backend.userservice.config;
+package com.backend.userservice.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +12,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth ->
-                auth.requestMatchers("/**").permitAll());
+        http.authorizeHttpRequests(auth -> auth.requestMatchers("/**").permitAll());
         return http.build();
     }
 }
