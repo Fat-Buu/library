@@ -1,4 +1,4 @@
-package com.backend.userservice.Interfaces.web.dto;
+package com.backend.userservice.interfaces.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

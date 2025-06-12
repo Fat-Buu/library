@@ -1,4 +1,4 @@
-package com.backend.userservice.Interfaces.web;
+package com.backend.userservice.interfaces.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
