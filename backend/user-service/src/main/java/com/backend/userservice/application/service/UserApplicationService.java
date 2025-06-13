@@ -19,4 +19,5 @@ public class UserApplicationService {
         Page<User> pages = userRepository.findAll(pageable);
         return pages.map(UserMapper.INSTANCE::toDto);
     }
+
 }

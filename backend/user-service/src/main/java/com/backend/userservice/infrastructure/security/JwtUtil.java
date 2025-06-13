@@ -5,6 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -17,8 +18,8 @@ public class JwtUtil {
     private final String TOKEN_PREFIX = "Bearer ";
     private final SecretKey secretKey = Keys.hmacShaKeyFor("my-secret-key-12345-678910-1112131415".getBytes(StandardCharsets.UTF_8));
 
-    public String generateToken(String username) {
-        return Jwts.builder().subject(username).issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)).signWith(secretKey).compact();
+    public String generateToken(UserDetails userDetails) {
+        return Jwts.builder().subject(userDetails.getUsername()).issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)).signWith(secretKey).compact();
     }
 
     public String resolveToken(HttpServletRequest request) {

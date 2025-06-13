@@ -18,4 +18,4 @@ EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
 # docker build -t user-service .
-# docker run -p 8081:8081 user-service
+# docker run -p 8081:8081 --name user-service user-service
