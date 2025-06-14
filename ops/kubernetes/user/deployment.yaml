@@ -14,7 +14,14 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: user-service:latest
+          image: user-service:1.0.0
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://host.docker.internal:3307/user_db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: user_user
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: user_password

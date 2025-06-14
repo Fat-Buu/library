@@ -1,4 +1,4 @@
-CREATE TABLE `user` (
+CREATE TABLE `users` (
 	id varchar(100) NOT NULL,
 	user_name varchar(100) NULL,
 	password varchar(300) NULL,
