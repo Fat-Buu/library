@@ -9,7 +9,7 @@ class BookListScreen extends ConsumerStatefulWidget {
   const BookListScreen({super.key});
 
   @override
-  BookListScreenState createState() => BookListScreenState();
+  ConsumerState<BookListScreen> createState() => BookListScreenState();
 }
 
 class BookListScreenState extends ConsumerState<BookListScreen> {
