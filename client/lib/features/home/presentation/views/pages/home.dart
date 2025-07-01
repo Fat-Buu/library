@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/routes/app_routes.dart';
+import '../../../../../core/widgets/title_text.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,10 +18,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
-        title: Text(
-          "Library",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-        ),
+        title: titleText("Library"),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Container(color: Colors.black, height: 1),
@@ -28,7 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             padding: EdgeInsets.only(right: 20),
             child: ElevatedButton(
               onPressed: () {
-                context.go("/login");
+                context.go(AppRoutes.login);
               },
               child: Text("Get Started", style: TextStyle(color: Colors.white)),
               style: ButtonStyle(

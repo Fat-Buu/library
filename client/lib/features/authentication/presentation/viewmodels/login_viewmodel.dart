@@ -18,13 +18,10 @@ class LoginViewModel extends _$LoginViewModel {
   }
 
   Future<void> login() async {
-    try {
-      state = const AsyncLoading();
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
       String accessToken = await _authenticationRepositoryImpl.login();
-      state = AsyncData(LoginState(accessToken: accessToken, isSuccess: true));
-    } catch (error, stackTrace) {
-      state = AsyncError(error, stackTrace);
-    }
-    ;
+      return LoginState(accessToken: accessToken, isSuccess: true);
+    });
   }
 }
