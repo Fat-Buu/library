@@ -25,4 +25,5 @@ public class AuthApplicationService implements UserDetailsService {
         List<SimpleGrantedAuthority> authorities = Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
     }
+
 }

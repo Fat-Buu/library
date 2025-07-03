@@ -28,7 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             padding: EdgeInsets.only(right: 20),
             child: ElevatedButton(
               onPressed: () {
-                context.go(AppRoutes.login);
+                context.goNamed(AppRoutes.login);
               },
               child: Text("Get Started", style: TextStyle(color: Colors.white)),
               style: ButtonStyle(
@@ -63,7 +63,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 backgroundColor: WidgetStatePropertyAll(Colors.green),
               ),
               onPressed: () {
-                context.go("/books");
+                context.goNamed(AppRoutes.bookList);
               },
               child: Text(
                 "Start reading",

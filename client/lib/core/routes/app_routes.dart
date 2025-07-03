@@ -3,30 +3,35 @@ import 'package:oneoone_library/features/authentication/presentation/views/pages
 import 'package:oneoone_library/features/home/presentation/views/pages/home.dart';
 
 import '../../features/books/presentation/views/pages/book_list_screen.dart';
+import '../../features/error/presentations/views/pages/error_screen.dart';
 
 class AppRoutes {
-  static const String home = "/home";
-  static const String login = "/login";
-  static const String bookList = "/books";
+  static const String home = "home";
+  static const String login = "login";
+  static const String bookList = "books";
 }
 
 final GoRouter router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: "/home",
+  errorBuilder: (context, state) => ErrorScreen(),
   routes: <RouteBase>[
     GoRoute(
-      path: AppRoutes.home,
+      name: AppRoutes.home,
+      path: "/home",
       builder: (context, state) {
         return const HomeScreen();
       },
     ),
     GoRoute(
-      path: AppRoutes.bookList,
+      name: AppRoutes.bookList,
+      path: "/books",
       builder: (context, state) {
         return const BookListScreen();
       },
     ),
     GoRoute(
-      path: AppRoutes.login,
+      name: AppRoutes.login,
+      path: "/login",
       builder: (context, state) {
         return const LoginScreen();
       },

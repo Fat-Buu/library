@@ -39,7 +39,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         data: (data) {
           if (mounted) {
             if (data.accessToken.isNotEmpty) {
-              context.go(AppRoutes.bookList);
+              context.goNamed(AppRoutes.bookList);
             }
           }
         },

@@ -31,12 +31,16 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info("########## doFilterInternal ##########");
         Map<String, Object> errorDetails = new HashMap<>();
-
         try {
             String accessToken = jwtUtil.resolveToken(request);
             if (null == accessToken) {
                 filterChain.doFilter(request, response);
+                return;
+            }
+            if (jwtUtil.isBackListed(accessToken)) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
             logger.info("AccessToken: " + accessToken);

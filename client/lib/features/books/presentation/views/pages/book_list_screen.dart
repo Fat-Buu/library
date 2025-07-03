@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:oneoone_library/core/routes/app_routes.dart';
 
 import '../../../../../core/widgets/title_text.dart';
 import '../../../domain/entities/book.dart';
@@ -14,6 +16,9 @@ class BookListScreen extends ConsumerStatefulWidget {
 }
 
 class BookListScreenState extends ConsumerState<BookListScreen> {
+  bool _isSearching = false;
+  TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -25,7 +30,23 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
-        title: titleText("Library"),
+        title:
+            _isSearching
+                ? Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 100),
+                    child: TextField(
+                      controller: _searchController,
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: "Search...",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                )
+                : titleText("Library"),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Container(color: Colors.black, height: 1),
@@ -34,15 +55,42 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
           Padding(
             padding: EdgeInsets.only(right: 20),
             child: IconButton(
-              onPressed: () {},
-              icon: CircleAvatar(child: Icon(Icons.search)),
+              onPressed: () {
+                setState(() {
+                  if (_isSearching) {
+                    _searchController.clear();
+                  }
+                  _isSearching = !_isSearching;
+                });
+              },
+              icon: CircleAvatar(
+                child: _isSearching ? Icon(Icons.close) : Icon(Icons.search),
+              ),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(right: 20),
-            child: IconButton(
-              onPressed: () {},
+            child: PopupMenuButton(
               icon: CircleAvatar(child: Icon(Icons.person)),
+              onSelected: (value) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(value),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                  if (value == "logout") {
+                    context.goNamed(AppRoutes.home);
+                  }
+                }
+              },
+              itemBuilder:
+                  (BuildContext context) => [
+                    PopupMenuItem(value: "profile", child: Text("Profile")),
+                    PopupMenuItem(value: "setting", child: Text("Settings")),
+                    PopupMenuItem(value: "logout", child: Text("Logout")),
+                  ],
             ),
           ),
         ],
