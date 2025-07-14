@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneoone_library/core/routes/app_routes.dart';
 
@@ -18,10 +19,29 @@ class BookListScreen extends ConsumerStatefulWidget {
 class BookListScreenState extends ConsumerState<BookListScreen> {
   bool _isSearching = false;
   TextEditingController _searchController = TextEditingController();
+  String _token = "";
+  final storage = FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
+    loadToken();
+  }
+
+  Future<void> loadToken() async {
+    String? token = await storage.read(key: "access_token");
+    setState(() {
+      if (token == null) {
+        context.goNamed(AppRoutes.login);
+      } else {
+        _token = token;
+      }
+    });
+  }
+
+  Future<void> logout() async {
+    await storage.delete(key: "access_token");
+    loadToken();
   }
 
   @override
@@ -81,6 +101,7 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
                     ),
                   );
                   if (value == "logout") {
+                    logout();
                     context.goNamed(AppRoutes.home);
                   }
                 }
@@ -107,6 +128,7 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
                 }
                 return Column(
                   children: [
+                    Expanded(child: Text("Token: ${_token}")),
                     Expanded(
                       child: ListView.builder(
                         itemCount: books.isEmpty ? 1 : books.length + 1,

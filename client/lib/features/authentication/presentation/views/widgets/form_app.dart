@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:oneoone_library/core/routes/app_routes.dart';
 
 import '../../viewmodels/login_viewmodel.dart';
 
@@ -45,6 +47,12 @@ class FormApp extends StatelessWidget {
                 }
               },
               child: Text('Login'),
+            ),
+            TextButton(
+              onPressed: () {
+                context.goNamed(AppRoutes.home);
+              },
+              child: Text('Back'),
             ),
           ],
         ),
