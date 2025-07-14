@@ -39,6 +39,7 @@ dependencies:
   go_router: ^15.1.2
   flutter_secure_storage: ^9.2.4
   shared_preferences: ^2.5.3
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -97,3 +98,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/shiba.ico"
+  min_sdk_android: 21 # android min sdk min:16, default 21
