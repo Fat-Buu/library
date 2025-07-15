@@ -6,6 +6,7 @@ class BookModel extends Book {
     required super.title,
     required super.author,
     required super.category,
+    required super.image,
   });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +15,7 @@ class BookModel extends Book {
       title: json['title'],
       author: json['author'],
       category: json['category'],
+      image: json['image'],
     );
   }
 }

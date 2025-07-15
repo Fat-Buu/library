@@ -140,6 +140,7 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
                             title: book.title,
                             author: book.author,
                             category: book.category,
+                            image: book.image ?? "assets/images/photo.png",
                           );
                         },
                       ),
@@ -147,7 +148,8 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
                   ],
                 );
               },
-              error: (e, _) => Center(child: Text("Something error!!")),
+              error:
+                  (e, l) => Center(child: Text("Something error!! ${e} ${l}")),
               loading: () => Center(child: CircularProgressIndicator()),
             ),
           ),

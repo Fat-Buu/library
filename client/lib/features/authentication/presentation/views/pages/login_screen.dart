@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneoone_library/features/authentication/presentation/viewmodels/login_viewmodel.dart';
 import 'package:oneoone_library/features/authentication/presentation/views/widgets/form_app.dart';
@@ -17,10 +18,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameCtl = TextEditingController();
   final _passwordCtl = TextEditingController();
+  final storage = FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
+    loadToken();
+  }
+
+  Future<void> loadToken() async {
+    String? token = await storage.read(key: "access_token");
+    setState(() {
+      if (token!.isNotEmpty) {
+        context.goNamed(AppRoutes.bookList);
+      }
+    });
   }
 
   @override

@@ -7,12 +7,14 @@ class BookRemoteDataSource {
         "title": "Clean Architecture",
         "author": "Robert C. Martin",
         "category": "Programming",
+        "image": "assets/icons/alaskan-malamute.png"
       },
       {
         "id": "2",
         "title": "Flutter in Action",
         "author": "Eric Windmill",
         "category": "Mobile Development",
+        "image": "assets/icons/bull-terrier.png"
       },
       {
         "id": "3",
