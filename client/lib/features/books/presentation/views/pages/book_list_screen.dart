@@ -19,7 +19,6 @@ class BookListScreen extends ConsumerStatefulWidget {
 class BookListScreenState extends ConsumerState<BookListScreen> {
   bool _isSearching = false;
   TextEditingController _searchController = TextEditingController();
-  String _token = "";
   final storage = FlutterSecureStorage();
 
   @override
@@ -33,15 +32,15 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
     setState(() {
       if (token == null) {
         context.goNamed(AppRoutes.login);
-      } else {
-        _token = token;
       }
     });
   }
 
   Future<void> logout() async {
     await storage.delete(key: "access_token");
-    loadToken();
+    setState(() {
+      context.goNamed(AppRoutes.home);
+    });
   }
 
   @override
@@ -128,7 +127,6 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
                 }
                 return Column(
                   children: [
-                    Expanded(child: Text("Token: ${_token}")),
                     Expanded(
                       child: ListView.builder(
                         itemCount: books.isEmpty ? 1 : books.length + 1,
