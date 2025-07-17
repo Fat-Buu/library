@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:oneoone_library/core/routes/app_routes.dart';
 
 import '../../../../../core/widgets/title_text.dart';
+import '../../../../authentication/presentation/viewmodels/login_viewmodel.dart';
 import '../../../domain/entities/book.dart';
 import '../../viewmodels/book_list_viewmodel.dart';
 import '../widgets/book_card.dart';
@@ -36,10 +37,11 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
     });
   }
 
-  Future<void> logout() async {
-    await storage.delete(key: "access_token");
-    setState(() {
-      context.goNamed(AppRoutes.home);
+  void logout() {
+    ref.read(loginViewModelProvider.notifier).logout().then((value) {
+      if (context.mounted) {
+        context.goNamed(AppRoutes.home);
+      }
     });
   }
 
@@ -101,7 +103,6 @@ class BookListScreenState extends ConsumerState<BookListScreen> {
                   );
                   if (value == "logout") {
                     logout();
-                    context.goNamed(AppRoutes.home);
                   }
                 }
               },

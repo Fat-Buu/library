@@ -24,7 +24,26 @@ class LoginViewModel extends _$LoginViewModel {
     state = await AsyncValue.guard(() async {
       String accessToken = await _authenticationRepositoryImpl.login();
       storage.write(key: "access_token", value: accessToken);
-      return LoginState(accessToken: accessToken, isSuccess: true);
+      return LoginState(accessToken: accessToken);
+    });
+  }
+
+  Future<void> loginWithGuest() async {
+    final storage = FlutterSecureStorage();
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      String accessToken = "guest_access_token";
+      storage.write(key: "access_token", value: accessToken);
+      return LoginState(accessToken: accessToken);
+    });
+  }
+
+  Future<void> logout() async {
+    final storage = FlutterSecureStorage();
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await storage.delete(key: "access_token");
+      return LoginState(accessToken: "");
     });
   }
 }

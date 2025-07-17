@@ -40,19 +40,44 @@ class FormApp extends StatelessWidget {
               decoration: InputDecoration(labelText: "password"),
               validator: (value) => value!.isEmpty ? 'required password' : null,
             ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  await loginNotifier.login();
-                }
-              },
-              child: Text('Login'),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              width: 175,
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    await loginNotifier.login();
+                  }
+                },
+                child: Text('Login', style: TextStyle(color: Colors.blue)),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              width: 175,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                        Colors.blue.withValues(alpha: 0.5))
+                ),
+                onPressed: () async {
+                  await loginNotifier.loginWithGuest();
+                },
+                child: Text(
+                  'Login with guest',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
             TextButton(
               onPressed: () {
                 context.goNamed(AppRoutes.home);
               },
-              child: Text('Back'),
+              child: Text('Back',
+                style: TextStyle(
+                    color: Colors.blue, decoration: TextDecoration.underline,
+                    decorationColor: Colors.blue),
+              ),
             ),
           ],
         ),
