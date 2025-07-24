@@ -1,0 +1,3 @@
+fastapi dev main.py
+
+https://fastapi.tiangolo.com/tutorial/
